@@ -106,6 +106,9 @@
                                 <rect key="frame" x="172" y="230" width="70" height="44"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="26"/>
                                 <state key="normal" title="Realm"/>
+                                <connections>
+                                    <segue destination="9ov-Jz-t5i" kind="presentation" modalPresentationStyle="fullScreen" id="FBN-2c-ffe"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -131,13 +134,28 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="coreCell" id="bFb-K0-RrT">
-                                <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="coreCell" rowHeight="70" id="bFb-K0-RrT" customClass="CoreDataCell" customModule="MyTasks" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bFb-K0-RrT" id="lua-Ff-JKL">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RPf-0f-7TU">
+                                            <rect key="frame" x="20" y="24.5" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="RPf-0f-7TU" firstAttribute="centerY" secondItem="lua-Ff-JKL" secondAttribute="centerY" id="FzZ-AN-r0X"/>
+                                        <constraint firstItem="RPf-0f-7TU" firstAttribute="leading" secondItem="lua-Ff-JKL" secondAttribute="leadingMargin" id="cYG-Ry-jBe"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="taskLabel" destination="RPf-0f-7TU" id="KqQ-0i-Btb"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -155,7 +173,57 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="flw-Uq-4Zr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2715.9420289855075" y="-214.28571428571428"/>
+            <point key="canvasLocation" x="2630.434782608696" y="-214.28571428571428"/>
+        </scene>
+        <!--Realm Tasks-->
+        <scene sceneID="GWb-41-YXK">
+            <objects>
+                <tableViewController id="oWU-wd-GOP" customClass="RealmController" customModule="MyTasks" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="vgb-s6-f4r">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="realmCell" rowHeight="69" id="adK-2H-sdo" customClass="RealmCell" customModule="MyTasks" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="414" height="69"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="adK-2H-sdo" id="dfX-I9-N6e">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="69"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uJ7-wd-gqd">
+                                            <rect key="frame" x="20" y="24" width="42" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="uJ7-wd-gqd" firstAttribute="centerY" secondItem="dfX-I9-N6e" secondAttribute="centerY" id="fyd-qx-MF5"/>
+                                        <constraint firstItem="uJ7-wd-gqd" firstAttribute="leading" secondItem="dfX-I9-N6e" secondAttribute="leadingMargin" id="vmM-43-2mU"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="taskLabel" destination="uJ7-wd-gqd" id="KJP-w2-fCe"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="oWU-wd-GOP" id="Og6-ES-R70"/>
+                            <outlet property="delegate" destination="oWU-wd-GOP" id="lMz-Fp-6Ye"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Realm Tasks" id="p7B-st-rFk">
+                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="EVI-Tm-8j6">
+                            <connections>
+                                <action selector="newTaskTapped:" destination="oWU-wd-GOP" id="qqc-DV-o0F"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o8a-3t-148" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2630.434782608696" y="439.95535714285711"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="7Kq-4s-0HH">
@@ -174,6 +242,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qCQ-gm-NvM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1805.7971014492755" y="-214.28571428571428"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="kDV-C5-tS4">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="9ov-Jz-t5i" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Cr2-Gw-yrK">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="oWU-wd-GOP" kind="relationship" relationship="rootViewController" id="YRU-sW-gjX"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Aup-L7-nMX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1806" y="440"/>
         </scene>
     </scenes>
 </document>

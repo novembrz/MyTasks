@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		0189828AFF57AB522AC97979 /* Pods_MyTasks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8992AD4CB232CB56C09FC72D /* Pods_MyTasks.framework */; };
+		C2464E102512257C00C09AA6 /* CoreDataCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2464E0F2512257C00C09AA6 /* CoreDataCell.swift */; };
 		C2473DED250F861F003059B8 /* RealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2473DEC250F861F003059B8 /* RealmModel.swift */; };
 		C2473DEF250F87FA003059B8 /* RealmStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2473DEE250F87FA003059B8 /* RealmStorageManager.swift */; };
+		C2473DF1250F88E4003059B8 /* RealmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2473DF0250F88E4003059B8 /* RealmController.swift */; };
 		C24AE5A9250F650E00299C81 /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24AE5A8250F650E00299C81 /* CoreDataController.swift */; };
 		C24AE5AB250F656C00299C81 /* CoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C24AE5AA250F656C00299C81 /* CoreDataProvider.swift */; };
 		C27E2950250F5B41000BC052 /* Persistance.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27E294F250F5B41000BC052 /* Persistance.swift */; };
@@ -20,13 +22,16 @@
 		C2A2EDA6250F5A2D009C1F9D /* MyTasks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C2A2EDA4250F5A2D009C1F9D /* MyTasks.xcdatamodeld */; };
 		C2A2EDA8250F5A2F009C1F9D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C2A2EDA7250F5A2F009C1F9D /* Assets.xcassets */; };
 		C2A2EDAB250F5A2F009C1F9D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C2A2EDA9250F5A2F009C1F9D /* LaunchScreen.storyboard */; };
+		C2B8F64625120F5900EC16EB /* RealmCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2B8F64525120F5900EC16EB /* RealmCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		8992AD4CB232CB56C09FC72D /* Pods_MyTasks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyTasks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADAFF402A5CD979AAE79DFDA /* Pods-MyTasks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTasks.release.xcconfig"; path = "Pods/Target Support Files/Pods-MyTasks/Pods-MyTasks.release.xcconfig"; sourceTree = "<group>"; };
+		C2464E0F2512257C00C09AA6 /* CoreDataCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataCell.swift; sourceTree = "<group>"; };
 		C2473DEC250F861F003059B8 /* RealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmModel.swift; sourceTree = "<group>"; };
 		C2473DEE250F87FA003059B8 /* RealmStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStorageManager.swift; sourceTree = "<group>"; };
+		C2473DF0250F88E4003059B8 /* RealmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmController.swift; sourceTree = "<group>"; };
 		C24AE5A8250F650E00299C81 /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
 		C24AE5AA250F656C00299C81 /* CoreDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataProvider.swift; sourceTree = "<group>"; };
 		C27E294F250F5B41000BC052 /* Persistance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistance.swift; sourceTree = "<group>"; };
@@ -39,6 +44,7 @@
 		C2A2EDA7250F5A2F009C1F9D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C2A2EDAA250F5A2F009C1F9D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		C2A2EDAC250F5A2F009C1F9D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C2B8F64525120F5900EC16EB /* RealmCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmCell.swift; sourceTree = "<group>"; };
 		FFC62F125A1D55E1D4770743 /* Pods-MyTasks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyTasks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MyTasks/Pods-MyTasks.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +121,9 @@
 			children = (
 				C2A2ED9F250F5A2D009C1F9D /* ViewController.swift */,
 				C24AE5A8250F650E00299C81 /* CoreDataController.swift */,
+				C2464E0F2512257C00C09AA6 /* CoreDataCell.swift */,
+				C2473DF0250F88E4003059B8 /* RealmController.swift */,
+				C2B8F64525120F5900EC16EB /* RealmCell.swift */,
 				C2A2ED9B250F5A2D009C1F9D /* AppDelegate.swift */,
 				C2A2ED9D250F5A2D009C1F9D /* SceneDelegate.swift */,
 			);
@@ -257,7 +266,10 @@
 			files = (
 				C2A2EDA6250F5A2D009C1F9D /* MyTasks.xcdatamodeld in Sources */,
 				C2A2EDA0250F5A2D009C1F9D /* ViewController.swift in Sources */,
+				C2B8F64625120F5900EC16EB /* RealmCell.swift in Sources */,
 				C24AE5A9250F650E00299C81 /* CoreDataController.swift in Sources */,
+				C2464E102512257C00C09AA6 /* CoreDataCell.swift in Sources */,
+				C2473DF1250F88E4003059B8 /* RealmController.swift in Sources */,
 				C2473DEF250F87FA003059B8 /* RealmStorageManager.swift in Sources */,
 				C2A2ED9C250F5A2D009C1F9D /* AppDelegate.swift in Sources */,
 				C24AE5AB250F656C00299C81 /* CoreDataProvider.swift in Sources */,

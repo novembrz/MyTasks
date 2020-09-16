@@ -12,15 +12,17 @@ let realm = try! Realm()
 
 class RealmStorageManager {
     
+    static var tasks: Results<RealmTask> {
+        return realm.objects(RealmTask.self)
+    }
+    
     static func saveObject(_ task: RealmTask) {
-        
         try! realm.write {
             realm.add(task)
         }
     }
     
     static func deleteObject(_ task: RealmTask) {
-        
         try! realm.write {
             realm.delete(task)
         }

@@ -73,23 +73,18 @@ class CoreDataController: UITableViewController {
     
     
     // MARK: - Table view data source
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
-    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return tasks.count
+        return tasks.isEmpty ? 0 : tasks.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "coreCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "coreCell", for: indexPath) as! CoreDataCell
 
         let task = tasks[indexPath.row]
-        cell.textLabel?.text = task.title
+        cell.taskLabel.text = task.title
 
         return cell
     }
@@ -107,7 +102,7 @@ class CoreDataController: UITableViewController {
         let task = tasks[indexPath.row]
         let action = UIContextualAction(style: .normal, title: "Done") { (action, view, completion) in
             
-            self.taskObj.done = true
+            self.taskObj.done = !(self.taskObj.done)
             self.tasks[indexPath.row] = task
             
             do {
@@ -116,15 +111,15 @@ class CoreDataController: UITableViewController {
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
-            completion(true)
+            
+            if self.taskObj.done == true {
+                action.backgroundColor = .systemGreen
+            } else {
+                action.backgroundColor = .systemGray
+            }
+            action.image = UIImage(systemName: "checkmark.circle")
+            
         }
-        
-        if taskObj.done == true {
-            action.backgroundColor = .systemGreen
-        } else {
-            action.backgroundColor = .systemGray
-        }
-        action.image = UIImage(systemName: "checkmark.circle")
         
         return action
     }
@@ -157,7 +152,6 @@ class CoreDataController: UITableViewController {
                 print(error.localizedDescription)
             }
             
-//            tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
     
