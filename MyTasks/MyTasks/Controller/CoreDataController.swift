@@ -11,11 +11,7 @@ import CoreData
 
 class CoreDataController: UITableViewController {
     
-    var tasks: [Task] = []
-    var context = CoreDataProvider.getContext()
-    var fetchRequest = CoreDataProvider.taskFetchRequest()
-    
-    var taskObj: Task!
+    let tasks = CoreDataProvider.tasks
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +20,7 @@ class CoreDataController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
          
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: false)
-        fetchRequest.sortDescriptors = [sortDescriptor]
-        
-        do {
-            tasks = try context.fetch(fetchRequest)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
+        CoreDataProvider.taskFetchRequest()
     }
     
     
@@ -41,7 +30,7 @@ class CoreDataController: UITableViewController {
         let saveAction = UIAlertAction(title: "Save", style: .default) { action in
             let tf = alertController.textFields?.first
             if let newTaskTitle = tf?.text {
-                self.saveTask(withTitle: newTaskTitle)
+                CoreDataProvider.saveTask(title: newTaskTitle)
                 self.tableView.reloadData()
             }
         }
@@ -56,26 +45,10 @@ class CoreDataController: UITableViewController {
     }
     
     
-    private func saveTask(withTitle title: String) {
-
-        guard let entity = NSEntityDescription.entity(forEntityName: "Task", in: context) else { return }
-        
-        let taskObject = Task(entity: entity, insertInto: context)
-        taskObject.title = title
-        
-        do {
-            try context.save()
-            tasks.append(taskObject)
-        } catch let error as NSError {
-            print(error.localizedDescription)
-        }
-    }
-    
     
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return tasks.isEmpty ? 0 : tasks.count
     }
 
@@ -88,42 +61,6 @@ class CoreDataController: UITableViewController {
 
         return cell
     }
-    
-    // MARK: - Done
-    
-    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let done = doneAction(at: indexPath)
-        
-        return UISwipeActionsConfiguration(actions: [done])
-    }
-    
-    func doneAction(at indexPath: IndexPath) -> UIContextualAction{
-        
-        let task = tasks[indexPath.row]
-        let action = UIContextualAction(style: .normal, title: "Done") { (action, view, completion) in
-            
-            self.taskObj.done = !(self.taskObj.done)
-            self.tasks[indexPath.row] = task
-            
-            do {
-                try self.context.save()
-                self.tableView.reloadData()
-            } catch let error as NSError {
-                print(error.localizedDescription)
-            }
-            
-            if self.taskObj.done == true {
-                action.backgroundColor = .systemGreen
-            } else {
-                action.backgroundColor = .systemGray
-            }
-            action.image = UIImage(systemName: "checkmark.circle")
-            
-        }
-        
-        return action
-    }
-
  
     // MARK: - Delete
     
@@ -138,14 +75,8 @@ class CoreDataController: UITableViewController {
             
             let task = tasks[indexPath.row]
             
-            if let fetchObj = try? context.fetch(fetchRequest) {
-                for _ in fetchObj {
-                    context.delete(task)
-                }
-            }
-            
-            do {
-                try context.save()
+            do{
+                CoreDataProvider.deleteTask(task: task)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
                 tableView.reloadData()
             } catch let error as NSError {
