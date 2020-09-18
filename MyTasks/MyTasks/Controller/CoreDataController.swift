@@ -11,16 +11,16 @@ import CoreData
 
 class CoreDataController: UITableViewController {
     
-    let tasks = CoreDataProvider.tasks
+    var tasks = CoreDataProvider.tasks
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        reloadData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
          
-        CoreDataProvider.taskFetchRequest()
     }
     
     
@@ -31,7 +31,7 @@ class CoreDataController: UITableViewController {
             let tf = alertController.textFields?.first
             if let newTaskTitle = tf?.text {
                 CoreDataProvider.saveTask(title: newTaskTitle)
-                self.tableView.reloadData()
+                self.reloadData()
             }
         }
         
@@ -42,6 +42,12 @@ class CoreDataController: UITableViewController {
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func reloadData(){
+        CoreDataProvider.taskFetchRequest()
+        tasks = CoreDataProvider.tasks
+        tableView.reloadData()
     }
     
     
@@ -77,8 +83,7 @@ class CoreDataController: UITableViewController {
             
             do{
                 CoreDataProvider.deleteTask(task: task)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-                tableView.reloadData()
+                reloadData()
             } catch let error as NSError {
                 print(error.localizedDescription)
             }
