@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import RealmSwift
+import RealmSwift
 
 class RealmController: UITableViewController {
     
@@ -45,6 +45,17 @@ class RealmController: UITableViewController {
         RealmStorageManager.saveObject(newTask)
     }
     
+    
+    private func editTask(with editTitle: String){
+        
+        let newIndexPath = tableView.indexPathForSelectedRow!
+        let task = tasks[newIndexPath.row]
+        
+        RealmStorageManager.editObject(editTask: task, newTask: editTitle)
+    }
+    
+    
+    
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -56,12 +67,35 @@ class RealmController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "realmCell", for: indexPath) as! RealmCell
         
         let task = tasks[indexPath.row]
-        cell.taskLabel.text = task.title
+        cell.setInfo(task: task)
         
         return cell
     }
     
-    //Del
+    // MARK: - Edit
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let alertController = UIAlertController(title: "Edit Task", message: "Please edit your task", preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Save", style: .default) { action in
+            let tf = alertController.textFields?.first
+            if let newTaskTitle = tf?.text {
+                self.editTask(with: newTaskTitle)
+                self.tableView.reloadData()
+            }
+        }
+        
+        alertController.addTextField { _ in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { _ in }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    // MARK: - Delete
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         
@@ -75,24 +109,28 @@ class RealmController: UITableViewController {
         return UISwipeActionsConfiguration(actions: [deleteAction])
     }
     
-    //Done
-//    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//
-//        let task = tasks[indexPath.row]
-//
-//        let doneAction = UIContextualAction(style: .normal, title: "Done") { (action, view, completion) in
-//
-//            task.done = !(task.done)
-//
-//            if task.done == true {
-//                action.backgroundColor = .systemGreen
-//            } else {
-//                action.backgroundColor = .systemGray
-//            }
-//            action.image = UIImage(systemName: "checkmark.circle")
-//        }
-//
-//        return UISwipeActionsConfiguration(actions: [doneAction])
-//    }
+    // MARK: Task is done
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let done = doneAction(indexPath: indexPath)
+        return UISwipeActionsConfiguration(actions: [done])
+    }
+    
+    
+    private func doneAction(indexPath: IndexPath) -> UIContextualAction{
+        let task = tasks[indexPath.row]
+        let action = UIContextualAction(style: .normal, title: "Избранное") { (action, view, completion) in
+            let done = !task.done
+            RealmStorageManager.editDone(editTask: task, newDone: done)
+            completion(true)
+        }
+        
+        action.backgroundColor = task.done ? .systemGreen : .systemGray
+        action.image = UIImage(systemName: "checkmark.circle")
+        
+        return action
+    }
+    
+
     
 }

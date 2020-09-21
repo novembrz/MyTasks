@@ -27,4 +27,16 @@ class RealmStorageManager {
             realm.delete(task)
         }
     }
+    
+    static func editObject(editTask : RealmTask, newTask: String){
+            try! realm.write {
+                editTask.title = newTask
+            }
+    }
+    
+    static func editDone(editTask : RealmTask, newDone: Bool){
+        try! realm.write {
+            editTask.done = newDone
+        }
+    }
 }

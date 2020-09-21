@@ -12,6 +12,7 @@ class RealmCell: UITableViewCell {
 
     @IBOutlet weak var taskLabel: UILabel!
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -22,11 +23,12 @@ class RealmCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    @IBAction func switchAction(_ sender: UISwitch) {
+    
+    func setInfo(task: RealmTask){
+        self.taskLabel.text = task.title
         
-        if sender.isOn{
-            
-        }
     }
+    
+    
     
 }
