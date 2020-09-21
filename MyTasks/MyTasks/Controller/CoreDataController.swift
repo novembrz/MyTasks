@@ -67,7 +67,39 @@ class CoreDataController: UITableViewController {
 
         return cell
     }
- 
+    
+    // MARK: - Edit
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let alertController = UIAlertController(title: "Edit Task", message: "Please edit your task", preferredStyle: .alert)
+        let saveAction = UIAlertAction(title: "Save", style: .default) { action in
+            let tf = alertController.textFields?.first
+            if let newTaskTitle = tf?.text {
+                self.editTask(with: newTaskTitle)
+                self.tableView.reloadData()
+            }
+        }
+        
+        alertController.addTextField { _ in }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default) { _ in }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    private func editTask(with editTitle: String){
+        
+        let newIndexPath = tableView.indexPathForSelectedRow!
+        let task = tasks[newIndexPath.row]
+        
+        CoreDataProvider.editObject(editTask: task, newTask: editTitle)
+    }
+    
+    
     // MARK: - Delete
     
     
@@ -89,6 +121,28 @@ class CoreDataController: UITableViewController {
             }
             
         }
+    }
+    
+    // MARK: Task is done
+    
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let done = doneAction(indexPath: indexPath)
+        return UISwipeActionsConfiguration(actions: [done])
+    }
+    
+    
+    private func doneAction(indexPath: IndexPath) -> UIContextualAction{
+        let task = tasks[indexPath.row]
+        let action = UIContextualAction(style: .normal, title: "Избранное") { (action, view, completion) in
+            let done = !task.done
+            CoreDataProvider.editDone(editTask: task, newDone: done)
+            completion(true)
+        }
+        
+        action.backgroundColor = task.done ? .systemGreen : .systemGray
+        action.image = UIImage(systemName: "checkmark.circle")
+        
+        return action
     }
     
 

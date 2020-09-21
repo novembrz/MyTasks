@@ -68,4 +68,30 @@ class CoreDataProvider {
             print(error.localizedDescription)
         }
     }
+    
+    static func editObject(editTask: Task, newTask: String){
+        
+        let context = CoreDataProvider.getContext()
+        editTask.title = newTask
+        
+        do {
+            try context.save()
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+    }
+    
+    static func editDone(editTask: Task, newDone: Bool){
+        
+        let context = CoreDataProvider.getContext()
+        editTask.done = newDone
+        
+        do {
+            try context.save()
+            
+        } catch let error as NSError {
+            print(error.localizedDescription)
+        }
+    }
 }

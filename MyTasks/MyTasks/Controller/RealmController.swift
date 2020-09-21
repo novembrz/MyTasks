@@ -46,15 +46,6 @@ class RealmController: UITableViewController {
     }
     
     
-    private func editTask(with editTitle: String){
-        
-        let newIndexPath = tableView.indexPathForSelectedRow!
-        let task = tasks[newIndexPath.row]
-        
-        RealmStorageManager.editObject(editTask: task, newTask: editTitle)
-    }
-    
-    
     
     // MARK: - Table view data source
 
@@ -92,6 +83,15 @@ class RealmController: UITableViewController {
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    private func editTask(with editTitle: String){
+        
+        let newIndexPath = tableView.indexPathForSelectedRow!
+        let task = tasks[newIndexPath.row]
+        
+        RealmStorageManager.editObject(editTask: task, newTask: editTitle)
     }
     
     
